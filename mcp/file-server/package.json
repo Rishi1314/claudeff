@@ -1,0 +1,26 @@
+{
+  "name": "@claudeff/file-server",
+  "version": "0.1.0",
+  "description": "Token-efficient MCP file server for Claude Code — serves symbols, outlines, and diffs instead of full files",
+  "type": "module",
+  "bin": {
+    "claudeff-file-server": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "tree-sitter": "^0.21.0",
+    "tree-sitter-typescript": "^0.21.0",
+    "tree-sitter-javascript": "^0.21.0",
+    "tree-sitter-python": "^0.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
+}

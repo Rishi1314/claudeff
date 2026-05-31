@@ -1,0 +1,17 @@
+# Claude Code local settings (machine-specific paths)
+.claude/settings.local.json
+
+# Node
+node_modules/
+mcp/file-server/dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
