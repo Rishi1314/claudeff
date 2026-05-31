@@ -13,7 +13,8 @@ A collection of independently shippable tools that improve Claude Code without t
 3. **Speculative execution** — solves trust problem for all users, easy to demo
 4. ~~**Smart MCP file server**~~ — **DONE** (`mcp/file-server/`)
 5. ~~**Allow-all permissions helper**~~ — **DONE** (`cli/allow-all/`)
-6. Everything else in TODO.md
+6. ~~**One-command installer**~~ — **DONE** (`install.py`)
+7. Everything else in TODO.md
 
 ## Architecture principles
 

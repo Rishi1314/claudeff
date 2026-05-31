@@ -4,6 +4,7 @@
 - [x] Pre-flight permission manifest (`hooks/preflight/`) — Python hook, Claude Haiku analysis, terminal UI, session manifest, auto-approve/block
 - [x] Smart MCP file server (`mcp/file-server/`) — TypeScript MCP, read_symbol, file_outline, read_range, search_symbols, file_diff
 - [x] Allow-all permissions helper (`cli/allow-all/`) — patches ~/.claude/settings.json to allow all standard tools; supports --undo and --dry-run
+- [x] One-command installer (`install.py`) — installs all three tools in sequence; supports --uninstall and --dry-run
 
 ## Next up (in priority order)
 
@@ -34,7 +35,6 @@
 - [ ] claudeff lint: check stale paths, outdated versions, missing commands
 
 ## Backlog
-- [ ] One-command install for everything (install_all.py)
 - [ ] Demo GIF recordings for each tool
 - [ ] npm package for file-server
 - [ ] PyPI package for hooks
