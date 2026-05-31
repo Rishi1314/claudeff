@@ -2,10 +2,11 @@
 """
 claudeff one-command installer.
 
-Installs all three claudeff tools into ~/.claude/settings.json:
+Installs all claudeff tools:
   1. allow-all     — stop permission prompts
   2. file-server   — smart MCP file tools (needs Node 18+)
   3. preflight     — pre-flight permission manifest hook
+  4. autopsy       — bug autopsy CLI (standalone, no settings changes)
 
 Usage:
     python install.py
@@ -13,22 +14,28 @@ Usage:
     python install.py --dry-run     (allow-all preview only)
 """
 
+import os
 import subprocess
 import sys
 from pathlib import Path
 
+# Ensure Unicode output works on Windows consoles (CP1252 can't encode checkmarks)
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = Path(__file__).parent
 
 STEPS = [
-    ("Allow-all permissions",    ROOT / "cli"   / "allow-all"  / "allow_all.py",        []),
-    ("Smart MCP file server",    ROOT / "mcp"   / "file-server" / "install.py",          []),
-    ("Pre-flight manifest hook", ROOT / "hooks" / "preflight"  / "install.py",           []),
+    ("Allow-all permissions",    ROOT / "cli"   / "allow-all"  / "allow_all.py",    []),
+    ("Smart MCP file server",    ROOT / "mcp"   / "file-server" / "install.py",      []),
+    ("Pre-flight manifest hook", ROOT / "hooks" / "preflight"  / "install.py",       []),
+    ("Bug autopsy CLI",          ROOT / "cli"   / "autopsy"    / "install.py",       []),
 ]
 
 UNINSTALL_STEPS = [
-    ("Allow-all permissions",    ROOT / "cli"   / "allow-all"  / "allow_all.py",        ["--undo"]),
-    ("Smart MCP file server",    ROOT / "mcp"   / "file-server" / "install.py",          ["--uninstall"]),
-    ("Pre-flight manifest hook", ROOT / "hooks" / "preflight"  / "install.py",           ["--uninstall"]),
+    ("Allow-all permissions",    ROOT / "cli"   / "allow-all"  / "allow_all.py",    ["--undo"]),
+    ("Smart MCP file server",    ROOT / "mcp"   / "file-server" / "install.py",      ["--uninstall"]),
+    ("Pre-flight manifest hook", ROOT / "hooks" / "preflight"  / "install.py",       ["--uninstall"]),
 ]
 
 
@@ -36,7 +43,8 @@ def run(label: str, script: Path, extra_args: list[str]) -> bool:
     print(f"\n{'='*50}")
     print(f"  {label}")
     print(f"{'='*50}")
-    result = subprocess.run([sys.executable, str(script)] + extra_args)
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    result = subprocess.run([sys.executable, str(script)] + extra_args, env=env)
     if result.returncode != 0:
         print(f"\n  ✗ {label} failed (exit {result.returncode})")
         return False

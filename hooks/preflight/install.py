@@ -13,6 +13,9 @@ import sys
 import os
 from pathlib import Path
 
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 HOOK_SCRIPT = Path(__file__).parent / "preflight.py"
 SETTINGS_PATH = Path.home() / ".claude" / "settings.json"
 

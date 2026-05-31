@@ -11,6 +11,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+# npm.cmd required on Windows; bare "npm" isn't on the subprocess PATH
+NPM = "npm.cmd" if sys.platform == "win32" else "npm"
+
 SERVER_DIR = Path(__file__).parent
 SETTINGS_PATH = Path.home() / ".claude" / "settings.json"
 SERVER_NAME = "claudeff-file-server"
@@ -34,8 +40,8 @@ def install():
     print("Installing claudeff file-server MCP…")
 
     print("  Building TypeScript…")
-    subprocess.run(["npm", "install"], cwd=SERVER_DIR, check=True, capture_output=True)
-    subprocess.run(["npm", "run", "build"], cwd=SERVER_DIR, check=True, capture_output=True)
+    subprocess.run([NPM, "install"], cwd=SERVER_DIR, check=True, capture_output=True)
+    subprocess.run([NPM, "run", "build"], cwd=SERVER_DIR, check=True, capture_output=True)
     print("  ✓ Built")
 
     dist = SERVER_DIR / "dist" / "index.js"

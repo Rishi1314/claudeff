@@ -2,7 +2,7 @@
 
 > Claude Code tools so good developers share them unprompted.
 
-A suite of independently installable tools that fix real Claude Code pain points — pre-flight permissions, surgical file access, and zero-prompt operation.
+A suite of independently installable tools that fix real Claude Code pain points — pre-flight permissions, surgical file access, instant bug archaeology, and zero-prompt operation.
 
 ## Install everything (one line)
 
@@ -65,6 +65,41 @@ python claudeff/mcp/file-server/install.py
 
 ---
 
+### Bug autopsy
+**`cli/autopsy/`**
+
+Paste an error message — get the commits most likely to have introduced it, ranked by likelihood.
+
+```
+$ python cli/autopsy/autopsy.py "TypeError: Cannot read properties of undefined (reading 'sessionId')"
+
+Searching 6 keyword(s): read, properties, session, TypeError, sessionId ...
+  3 candidate commit(s) found.
+
+════════════════════════════════════════════════════════════════
+  BUG AUTOPSY
+════════════════════════════════════════════════════════════════
+  #1  a1b2c3d  refactor: restructure session token handling
+      Author  : Jane Doe  |  2024-01-14  (2 days ago)
+      Score   : 14.0  |  keywords in code: session, sessionId
+      Changed : src/auth/session.ts, src/auth/token.ts
+      Inspect : git show a1b2c3d
+
+  Next steps: git show a1b2c3d  ·  git bisect start
+════════════════════════════════════════════════════════════════
+```
+
+How it works: extracts symbols from the error → `git log -S` pickaxe search (finds commits that *changed* those strings) → scores by hit count + recency → prints ranked report with bisect commands.
+
+Zero dependencies. No API key. Runs anywhere git is installed.
+
+```bash
+python cli/autopsy/autopsy.py "your error message"
+python cli/autopsy/autopsy.py "login fails after token refresh" --top 10
+```
+
+---
+
 ### Allow-all permissions helper
 **`cli/allow-all/`**
 
@@ -94,13 +129,14 @@ python claudeff/install.py --uninstall
 | Tool | Python | Node |
 |------|--------|------|
 | allow-all | 3.9+ | — |
+| autopsy | 3.8+ | — |
 | preflight | 3.10+ | — |
 | file-server | 3.9+ | 18+ |
 
 ## What's next
 
-- **Bug autopsy** — trace any bug to its culprit commit via `git log -S`, ranked by likelihood
 - **Speculative execution** — run changes in a sandbox, show diff + test results before applying
 - **Goal anchoring hook** — re-inject the original task every N tool calls to prevent drift
+- **Test loop detector** — catch when Claude is stuck retrying the same failing test
 
 See [TODO.md](TODO.md) for the full roadmap.

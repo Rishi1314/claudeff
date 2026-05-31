@@ -4,15 +4,16 @@
 - [x] Pre-flight permission manifest (`hooks/preflight/`) — Python hook, Claude Haiku analysis, terminal UI, session manifest, auto-approve/block
 - [x] Smart MCP file server (`mcp/file-server/`) — TypeScript MCP, read_symbol, file_outline, read_range, search_symbols, file_diff
 - [x] Allow-all permissions helper (`cli/allow-all/`) — patches ~/.claude/settings.json to allow all standard tools; supports --undo and --dry-run
-- [x] One-command installer (`install.py`) — installs all three tools in sequence; supports --uninstall and --dry-run
+- [x] One-command installer (`install.py`) — installs all tools in sequence; supports --uninstall and --dry-run
+- [x] Bug autopsy (`cli/autopsy/`) — keyword extraction, git log -S pickaxe search, scored ranking; zero dependencies
 
 ## Next up (in priority order)
 
-### Bug autopsy (`cli/autopsy/`)
-- [ ] Input: bug description or GitHub issue URL
-- [ ] Steps: grep codebase, git log -S for symbol changes, rank commits by likelihood, explain why
-- [ ] Output: structured report (commit hash, author reasoning, fix suggestion)
-- [ ] Ships as: claudeff autopsy "error message" or claudeff autopsy <url>
+### Bug autopsy (`cli/autopsy/`) ✓ DONE
+- [x] Input: free-text bug description or error message
+- [x] Steps: keyword extraction → git log -S pickaxe per keyword → score by hits + message match + recency
+- [x] Output: ranked report with files changed, score breakdown, and next-step git commands
+- [x] Ships as: `python cli/autopsy/autopsy.py "error message"` (zero dependencies)
 
 ### Speculative execution (`hooks/speculative/`)
 - [ ] Intercept Write/Edit/Bash(delete)

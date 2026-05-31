@@ -9,7 +9,7 @@ A collection of independently shippable tools that improve Claude Code without t
 ## Build priority
 
 1. ~~**Pre-flight permission manifest**~~ — **DONE** (`hooks/preflight/`)
-2. **Bug autopsy** — dramatic before/after, demonstrable in 30s, universal pain
+2. ~~**Bug autopsy**~~ — **DONE** (`cli/autopsy/`)
 3. **Speculative execution** — solves trust problem for all users, easy to demo
 4. ~~**Smart MCP file server**~~ — **DONE** (`mcp/file-server/`)
 5. ~~**Allow-all permissions helper**~~ — **DONE** (`cli/allow-all/`)
@@ -119,4 +119,4 @@ Each tool ships with:
 - User wants tools shareable on Reddit/LinkedIn/HN — prioritize dramatic before/after, visual demos, and one-command install
 - Build one tool completely before starting the next
 - Confirm language/stack choice with user before starting each tool
-- Next tool to build: **Bug autopsy** (build priority #2)
+- Next tool to build: **Speculative execution** (build priority #3)
