@@ -5,10 +5,14 @@ One command to stop Claude Code from prompting for permission on every action.
 ## Install
 
 ```bash
-python cli/allow-all/allow_all.py
+# Everything at once (recommended)
+git clone https://github.com/Rishi1314/claudeff && python claudeff/install.py
+
+# Just this tool
+python claudeff/cli/allow-all/allow_all.py
 ```
 
-That's it. Patches `~/.claude/settings.json` in place, preserving any existing config.
+Patches `~/.claude/settings.json` in place, preserving any existing config.
 
 ## What it does
 

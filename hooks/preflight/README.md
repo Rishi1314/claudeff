@@ -55,16 +55,19 @@ Press `A` → Claude runs the full task without another prompt.
 ## Install
 
 ```bash
-cd hooks/preflight
-python install.py
+# Everything at once (recommended)
+git clone https://github.com/Rishi1314/claudeff && python claudeff/install.py
+
+# Just this tool
+python claudeff/hooks/preflight/install.py
 ```
 
-That's it. The hook registers itself in `~/.claude/settings.json`.
+The hook registers itself in `~/.claude/settings.json`.
 
 ## Uninstall
 
 ```bash
-python install.py --uninstall
+python claudeff/hooks/preflight/install.py --uninstall
 ```
 
 ## Disable for one session

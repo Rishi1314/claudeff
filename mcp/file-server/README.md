@@ -25,16 +25,19 @@ The file-server MCP exposes surgical access tools:
 ## Install
 
 ```bash
-cd mcp/file-server
-python install.py
+# Everything at once (recommended)
+git clone https://github.com/Rishi1314/claudeff && python claudeff/install.py
+
+# Just this tool
+python claudeff/mcp/file-server/install.py
 ```
 
-Restart Claude Code. The tools appear as `read_symbol`, `file_outline`, etc.
+Restart Claude Code after installing. The tools appear as `read_symbol`, `file_outline`, etc.
 
 ## Uninstall
 
 ```bash
-python install.py --uninstall
+python claudeff/mcp/file-server/install.py --uninstall
 ```
 
 ## Tools
