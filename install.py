@@ -74,3 +74,7 @@ def main():
         print(f"  Done — {total}/{total} tools {'uninstalled' if uninstall else 'installed'}.")
         if not uninstall:
             print("\n  Next: restart Claude Code to activate the MCP server.")
+
+
+if __name__ == "__main__":
+    main()
